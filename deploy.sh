@@ -1,5 +1,11 @@
 #!/bin/sh
- 
+
+mkdir /var/jenkins_home/.ssh
+
+ssh-keyscan 172.17.0.1 >> /var/jenkins_home/.ssh/known_hosts
+cp ./keys/deploy_key /var/jenkins_home/.ssh/id_rsa
+chmod 600 /var/jenkins_home/.ssh/id_rsa
+  
 ssh vagrant@172.17.0.1 <<EOF
   docker rmi -f bryancs/gjp || true
   docker rm -f gjp-demo || true
