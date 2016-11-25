@@ -28,19 +28,13 @@ Vagrant.configure("2") do |config|
 
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", inline: <<-SHELL
-    apt-get update
-#    apt-get install apt-transport-https ca-certificates
-#    sudo apt-key adv \
-#               --keyserver hkp://ha.pool.sks-keyservers.net:80 \
-#               --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-#    echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
-#    apt-get update
-    apt-get install docker-engine git -y
-    echo "DOCKER_OPTS='-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock'" | sudo tee /etc/default/docker
-    service docker start
-    git clone https://github.com/iambryancs/git-jenkins-pof.git /home/vagrant/git-jenkins-pof
-    cd /home/vagrant/git-jenkins-pof
-    docker-compose up
-  SHELL
+#  config.vm.provision "shell", inline: <<-SHELL
+#    sudo apt-get update
+#    sudo apt-get install git -y
+#  SHELL
+
+  config.vm.provision "docker" do |d|
+    d.run "jenkinsci/jenkins",
+      args: "--name jenkins -v '/vagrant/.vagrant/machines/default/virtualbox/private_key:/var/jenkins_home/.ssh/private_key' -p '8000:8000' -p '5000:5000' --network=host"
+  end
 end
