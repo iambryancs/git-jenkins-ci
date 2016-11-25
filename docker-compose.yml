@@ -1,6 +1,10 @@
 jenkins:
   image: jenkinsci/jenkins
+  volumes:
+    - /vagrant/.vagrant/machines/default/virtualbox/private_key:/var/jenkins_home/.ssh/private_key
   ports:
     - "8080:8080"
     - "5000:5000"
+  container_name: jenkins
+  net: "host"
 

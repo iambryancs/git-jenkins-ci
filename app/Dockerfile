@@ -7,4 +7,7 @@ WORKDIR /var/www/srv
 
 RUN npm install
 
+RUN chmod +x ./script/test.sh
+RUN ./script/test.sh
+
 CMD ["nodejs", "app.js"]
