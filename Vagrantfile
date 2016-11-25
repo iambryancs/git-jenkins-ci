@@ -28,13 +28,12 @@ Vagrant.configure("2") do |config|
 
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-#  config.vm.provision "shell", inline: <<-SHELL
-#    sudo apt-get update
-#    sudo apt-get install git -y
-#  SHELL
+  config.vm.provision "shell", inline: <<-SHELL
+    cat /vagrant/keys/deploy_key.pub >> /home/vagrant/.ssh/authorized_keys
+  SHELL
 
   config.vm.provision "docker" do |d|
     d.run "jenkinsci/jenkins",
-      args: "--name jenkins -v '/vagrant/.vagrant/machines/default/virtualbox/private_key:/var/jenkins_home/.ssh/private_key' -p '8000:8000' -p '5000:5000' --network=host"
+      args: "--name jenkins -p '8000:8000' -p '5000:5000' --network=host"
   end
 end
