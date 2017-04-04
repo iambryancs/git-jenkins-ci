@@ -1,6 +1,6 @@
 {
   "name": "git-jenkins-ci-cd",
-  "description": "git-jenkins-cd-cd test app",
+  "description": "git-jenkins-ci test app",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
