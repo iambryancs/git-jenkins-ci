@@ -1,6 +1,6 @@
 {
-  "name": "git-jenkins-pof",
-  "description": "git-jenkins-pof test app",
+  "name": "git-jenkins-ci-cd",
+  "description": "git-jenkins-cd-cd test app",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
